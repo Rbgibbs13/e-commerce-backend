@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post('/', async(req, res) => {
   // req.body {
   //     "product_name": "Basketball",
   //     "price": 200.00,
@@ -77,9 +77,10 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put('/:id', async(req, res) => {
   // update product data
-  Product.update(req.body, {
+  console.log(req.body);
+  await Product.update(req.body, {
     where: {
       id: req.params.id,
     },
@@ -121,7 +122,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async(req, res) => {
   // delete one product by its `id` value
   try {
     const productData = await Product.destroy({ 

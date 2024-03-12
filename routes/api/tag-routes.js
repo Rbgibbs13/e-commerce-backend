@@ -54,14 +54,15 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
   try {
-    const tagData = Tag.findByPk(req.params.id);
+    const tagData = await Tag.findByPk(req.params.id);
+    console.log(tagData);
     tagData.set({
       tag_name: req.body.tag_name,
     });
     await tagData.save();
     console.log(tagData.id);
     res.status(200).json(tagData);
-  } catch {
+  } catch(err) {
     res.status(400).json(err);
   }
 });
